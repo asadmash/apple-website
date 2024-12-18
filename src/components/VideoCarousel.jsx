@@ -50,6 +50,28 @@ const VideoCarousel = () => {
       });
     }
   }, [videoId, startPlay]);
+
+  // STEP: 04 HANDLEPROCESS FUNCTION DECLARATION AND CONDITION
+  const handleProcess = (type, i) => {
+    // switch cases for different action type
+    switch (type) {
+      case "video-end":
+        setVideo((prev) => ({ ...prev, isEnd: true, videoId: i + 1 }));
+        break;
+      case "video-last":
+        setVideo((prev) => ({ ...prev, isLastVideo: true }));
+        break;
+      case "video-reset":
+        setVideo((prev) => ({ ...prev, isLastVideo: false, videoId: 0 }));
+        break;
+      case "play":
+        setVideo((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
+        break;
+      default:
+        return video;
+    }
+  };
+
   return (
     <>
       {/* container of the carousel */}
