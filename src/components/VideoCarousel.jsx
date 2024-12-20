@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { pauseImg, playImg, replayImg } from "../utils";
+import { useGSAP } from "@gsap/react";
 
 const VideoCarousel = () => {
   // video references
@@ -26,6 +27,23 @@ const VideoCarousel = () => {
   // destructure values from the useState
   const { isEnd, startPlay, videoId, isLastVideo, isPlaying } = video;
 
+  // STEP: 05 -> USE GSAP HOOK
+  useGSAP(() => {
+    gsap.to('#video', {
+      scrollTrigger: {
+        trigger: '#video',
+        toggleActions: 'restart none none none'
+      },
+      onComplete: () => {
+        setVideo((pre) => ({
+          ...pre, 
+          startPlay: true,
+          isPlaying: true, 
+        }))
+      }
+    })
+  }, [isEnd, videoId])
+
   // useEffect hook for video playing
   useEffect(() => {
     if (loadedData.length > 3) {
@@ -36,6 +54,9 @@ const VideoCarousel = () => {
       }
     }
   }, [startPlay, videoId, isPlaying, loadedData]);
+
+  // STEP: 06 -> HANDLE LOADED DATA
+  const handleLoadedData = (i, e) => setLoadedData((pre) => [...pre, e])
 
   // useEffect hook for video animation progress
   useEffect(() => {
@@ -94,6 +115,7 @@ const VideoCarousel = () => {
                       isPlaying: true,
                     }));
                   }}
+                  onLoadedData={(e) => handleLoadedData(i, e)}
                 >
                   <source src={list.video} type="video/mp4" />
                 </video>
