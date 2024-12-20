@@ -60,14 +60,42 @@ const VideoCarousel = () => {
 
   // useEffect hook for video animation progress
   useEffect(() => {
-    const currentProgress = 0;
+    let currentProgress = 0;
     let span = videoSpanRef.current;
 
     if (span[videoId]) {
       // animate the progress of the video
       let anim = gsap.to(span[videoId], {
-        onUpdate: () => {},
-        onComplete: () => {},
+        onUpdate: () => {
+          // STEP:08 
+          const progress = Math.ceil(anim.progress() * 100);
+
+          if(progress != currentProgress){
+            currentProgress = progress;
+
+            gsap.to(videoDivRef.current[videoId],{
+              width: window.innerWidth < 760 ? '10vw' : window.innerWidth < 1200 ? '10vw' : '4vw'
+            }
+            )
+          }
+
+          // STEP: 09
+          gsap.to(span[videoId], {
+            width: `${currentProgress}%`,
+            backgroundColor: 'white'
+          })
+        },
+        onComplete: () => {
+          // STEP: 10
+          if(isPlaying){
+            gsap.to(videoDivRef.current[videoId], {
+              width: '12px'
+            })
+            gsap.to(span[videoId], {
+              backgroundColor: '#afafaf'
+            })
+          }
+        },
       });
     }
   }, [videoId, startPlay]);
@@ -115,6 +143,7 @@ const VideoCarousel = () => {
                       isPlaying: true,
                     }));
                   }}
+                  // STEP: 07
                   onLoadedData={(e) => handleLoadedData(i, e)}
                 >
                   <source src={list.video} type="video/mp4" />
