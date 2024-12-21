@@ -29,20 +29,26 @@ const VideoCarousel = () => {
 
   // STEP: 05 -> USE GSAP HOOK
   useGSAP(() => {
-    gsap.to('#video', {
+    gsap.to("#video", {
       scrollTrigger: {
-        trigger: '#video',
-        toggleActions: 'restart none none none'
+        trigger: "#video",
+        toggleActions: "restart none none none",
       },
       onComplete: () => {
         setVideo((pre) => ({
-          ...pre, 
+          ...pre,
           startPlay: true,
-          isPlaying: true, 
-        }))
-      }
-    })
-  }, [isEnd, videoId])
+          isPlaying: true,
+        }));
+      },
+    });
+      // STEP: 15
+      gsap.to('#slider', {
+        transform: `translateX(${-100 * videoId}%)`,
+        duration: 2,
+        ease: 'power2.inOut'
+      })
+  }, [isEnd, videoId]);
 
   // useEffect hook for video playing
   useEffect(() => {
@@ -56,7 +62,7 @@ const VideoCarousel = () => {
   }, [startPlay, videoId, isPlaying, loadedData]);
 
   // STEP: 06 -> HANDLE LOADED DATA
-  const handleLoadedData = (i, e) => setLoadedData((pre) => [...pre, e])
+  const handleLoadedData = (i, e) => setLoadedData((pre) => [...pre, e]);
 
   // useEffect hook for video animation progress
   useEffect(() => {
@@ -67,36 +73,61 @@ const VideoCarousel = () => {
       // animate the progress of the video
       let anim = gsap.to(span[videoId], {
         onUpdate: () => {
-          // STEP:08 
+          // STEP:08
           const progress = Math.ceil(anim.progress() * 100);
 
-          if(progress != currentProgress){
+          if (progress != currentProgress) {
             currentProgress = progress;
 
-            gsap.to(videoDivRef.current[videoId],{
-              width: window.innerWidth < 760 ? '10vw' : window.innerWidth < 1200 ? '10vw' : '4vw'
-            }
-            )
+            gsap.to(videoDivRef.current[videoId], {
+              width:
+                window.innerWidth < 760
+                  ? "10vw"
+                  : window.innerWidth < 1200
+                  ? "10vw"
+                  : "4vw",
+            });
           }
 
           // STEP: 09
           gsap.to(span[videoId], {
             width: `${currentProgress}%`,
-            backgroundColor: 'white'
-          })
+            backgroundColor: "white",
+          });
         },
         onComplete: () => {
           // STEP: 10
-          if(isPlaying){
+          if (isPlaying) {
             gsap.to(videoDivRef.current[videoId], {
-              width: '12px'
-            })
+              width: "12px",
+            });
             gsap.to(span[videoId], {
-              backgroundColor: '#afafaf'
-            })
+              backgroundColor: "#afafaf",
+            });
           }
         },
       });
+
+      // STEP: 11
+      if (videoId === 0) {
+        anim.restart();
+      }
+
+      // STEP: 12
+
+      const animUpdate = () => {
+        anim.progress(
+          videoRef.current[videoId].currentTime /
+            highlightsSlides[videoId].videoDuration
+        );
+      };
+
+      // STEP: 13
+      if (isPlaying) {
+        gsap.ticker.add(animUpdate);
+      } else {
+        gsap.ticker.remove(animUpdate)
+      }
     }
   }, [videoId, startPlay]);
 
@@ -145,6 +176,12 @@ const VideoCarousel = () => {
                   }}
                   // STEP: 07
                   onLoadedData={(e) => handleLoadedData(i, e)}
+                    // STEP: 14
+                 onEnded={ () => 
+                  i !==3
+                  ? handleProcess('video-end', i)
+                  : handleProcess('video-last')
+                 }
                 >
                   <source src={list.video} type="video/mp4" />
                 </video>
