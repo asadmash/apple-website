@@ -5,7 +5,7 @@ import {
   View,
 } from "@react-three/drei";
 import React from "react";
-import * as THREE from 'three'; 
+import * as THREE from "three";
 import Lights from "./Lights";
 import { Suspense } from "react";
 import Model from "./Iphone";
@@ -32,16 +32,16 @@ const ModelView = ({
 
       <Lights />
 
-     <OrbitControls
-     makeDefault
-     ref={controlRef}
-     enableZoom={false}
-     enablePan={false}
-     rotateSpeed={0.4}
-     target0={new THREE.Vector3(0, 0, 0)}
-     onEnd={() => setRotationState(controlRef.current.getAzimuthalAngle())}
-     />
-      
+      <OrbitControls
+        makeDefault
+        ref={controlRef}
+        enableZoom={false}
+        enablePan={false}
+        rotateSpeed={0.4}
+        target0={new THREE.Vector3(0, 0, 0)}
+        onEnd={() => setRotationState(controlRef.current.getAzimuthalAngle())}
+      />
+
       <group
         ref={groupRef}
         name={`${index === 1} ? 'small' : 'large' `}
@@ -51,11 +51,16 @@ const ModelView = ({
         <Suspense
           fallback={
             <Html>
-              <div>Loading...</div>
+              <div>Loading</div>
             </Html>
           }
         >
-          <Model />
+          {/* iphone */}
+          <Model
+            scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
+            item={item}
+            size={size}
+          />
         </Suspense>
       </group>
     </View>
