@@ -1,5 +1,4 @@
 import {
-  Html,
   OrbitControls,
   PerspectiveCamera,
   View,
@@ -9,6 +8,7 @@ import * as THREE from "three";
 import Lights from "./Lights";
 import { Suspense } from "react";
 import Model from "./Iphone";
+import Loader from "./Loader";
 // import {group} from "three";
 
 const ModelView = ({
@@ -50,9 +50,7 @@ const ModelView = ({
         {/* suspense component */}
         <Suspense
           fallback={
-            <Html>
-              <div>Loading</div>
-            </Html>
+            <Loader/>
           }
         >
           {/* iphone */}
