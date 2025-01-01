@@ -1,19 +1,9 @@
 import gsap from "gsap"
 
-// animate with gsap dry code
-// export const animateWithGsap = (target, animationProps, scrollProps) => {
-//     gsap.to(target, {
-//         ...animationProps,
-//         scrollTrigger: {
-//             trigger: target,
-//             toggleActions: 'restart, reverse, restart, reverse',
-//             start: 'top 85%',
-//             ...scrollProps,
-//         }
-//     })
-// }
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 
-//creating a function to simplify the creation of scroll-based animations by combining GSAP and scrollTrigger
+//create a function to simplify the creation of scroll-based animations by combining GSAP and scrollTrigger
 export const animateWithGsap = (target, animationProps, scrollProps) => {
 gsap.to( target, {
 ...animationProps,
@@ -21,7 +11,7 @@ scrollTrigger: {
     trigger: target,
     toggleActions: 'restart reverse restart reverse',
     start: 'top 85%',
-    ...scrollProps
+    ...scrollProps,
 }
 })
 }
