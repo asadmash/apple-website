@@ -6,7 +6,7 @@ import Model from './components/Model';
 import * as Sentry from '@sentry/react';
 
 function App() {
-  return <button onClick={() => {throw new Error("This is your first error!");}}>Break the world</button>;
+  // return <button onClick={() => {throw new Error("This is your first error!");}}>Break the world</button>;
   return (
     <main className='bg-black'>
 <Navbar/>
