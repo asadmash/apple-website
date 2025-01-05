@@ -1,9 +1,10 @@
-import React from "react";
-import { chipImg, frameImg } from "../utils";
+import React, { useRef } from "react";
+import { chipImg, frameImg, frameVideo } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const Chip = () => {
+   const videoRef = useRef()
   // use gsap to animate the chip img
   useGSAP(() => {
     gsap.from("#chip", {
@@ -44,6 +45,11 @@ const Chip = () => {
                 alt="frame"
                 className="bg-transparent relative z-10"
               />
+            </div>
+            <div className="chip-video">
+<video className="pointer-events-none" playsInline preload="none" autoPlay ref={videoRef}>
+    <source src={frameVideo} type="video/mp4"/>
+</video>
             </div>
           </div>
         </div>
