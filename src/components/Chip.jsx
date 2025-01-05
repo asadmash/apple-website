@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { chipImg, frameImg, frameVideo } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { animateWithGsap } from "../utils/animations";
 
 const Chip = () => {
   const videoRef = useRef();
@@ -15,6 +16,14 @@ const Chip = () => {
       opacity: 0,
       duration: 2,
       scale: 2,
+      ease: "power2.inOut",
+    });
+
+    // animate and make visible the chip description
+    animateWithGsap(".g_fadeIn", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
       ease: "power2.inOut",
     });
   }, []);
@@ -58,38 +67,38 @@ const Chip = () => {
               </video>
             </div>
           </div>
-          {/* game title */}
-          <p className="text-gray font-semibold text-center mt-3">
-            Honkai: Star Rail
-          </p>
-          {/* chip description */}
-          <div className="chip-text-container">
-            <div className="flex flex-1 justify-center flex-col">
-              <p className="chip-text g_fadeIn">
-                A17 Pro is an entirely new class of iPhone chip that delivers
-                our{" "}
-                <span className="text-white">
-                  best graphic performence by far
-                </span>
-                .
-              </p>
-            </div>
-
+        </div>
+        {/* game title */}
+        <p className="text-gray font-semibold text-center mt-3">
+          Honkai: Star Rail
+        </p>
+        {/* chip description */}
+        <div className="chip-text-container">
+          <div className="flex flex-1 justify-center flex-col">
             <p className="chip-text g_fadeIn">
-              Mobile{" "}
+              A17 Pro is an entirely new class of iPhone chip that delivers our{" "}
               <span className="text-white">
-                games will look and feel so immersive
+                best graphic performence by far
               </span>
-              , with incredibly detailed environments and characters.
+              .
             </p>
           </div>
 
+          <p className="chip-text g_fadeIn">
+            Mobile{" "}
+            <span className="text-white">
+              games will look and feel so immersive
+            </span>
+            , with incredibly detailed environments and characters.
+          </p>
+
           <div className="flex-1 flex justify-center flex-col g_fadeIn">
-<p className="chip-text">New</p>
-<p className="chip-bigtext">Pro-class GPU</p>
-<p className="chip-text">with 6 cores</p>
-          </div>
+          <p className="chip-text">New</p>
+          <p className="chip-bigtext">Pro-class GPU</p>
+          <p className="chip-text">with 6 cores</p>
         </div>
+        </div>
+  
       </div>
     </section>
   );
