@@ -6,6 +6,7 @@ import Model from './components/Model';
 import Features from './components/Features';
 
 import * as Sentry from '@sentry/react';
+import Chip from './components/Chip';
 
 function App() {
   // return <button onClick={() => {throw new Error("This is your first error!");}}>Break the world</button>;
@@ -16,6 +17,7 @@ function App() {
 <Highlights/>
 <Model/>
 <Features/>
+<Chip/>
     </main>
   )
 }
