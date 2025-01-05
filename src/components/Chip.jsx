@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const Chip = () => {
-   const videoRef = useRef()
+  const videoRef = useRef();
   // use gsap to animate the chip img
   useGSAP(() => {
     gsap.from("#chip", {
@@ -47,11 +47,19 @@ const Chip = () => {
               />
             </div>
             <div className="chip-video">
-<video className="pointer-events-none" playsInline preload="none" autoPlay ref={videoRef}>
-    <source src={frameVideo} type="video/mp4"/>
-</video>
+              <video
+                className="pointer-events-none"
+                playsInline
+                preload="none"
+                autoPlay
+                ref={videoRef}
+              >
+                <source src={frameVideo} type="video/mp4" />
+              </video>
             </div>
           </div>
+          {/* game title */}
+          <p className="text-gray font-semibold text-center mt-3">Honkai: Star Rail</p>
         </div>
       </div>
     </section>
