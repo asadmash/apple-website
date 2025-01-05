@@ -1,21 +1,21 @@
 import React from "react";
-import { chipImg } from "../utils";
+import { chipImg, frameImg } from "../utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const Chip = () => {
   // use gsap to animate the chip img
   useGSAP(() => {
-gsap.from('#chip', {
-    scrollTrigger: {
-        trigger: '#chip',
-        start: '20% bottom'
-    },
-    opacity: 0,
-    duration: 2,
-    scale: 2,
-    ease: 'power2.inOut'
-})
+    gsap.from("#chip", {
+      scrollTrigger: {
+        trigger: "#chip",
+        start: "20% bottom",
+      },
+      opacity: 0,
+      duration: 2,
+      scale: 2,
+      ease: "power2.inOut",
+    });
   }, []);
 
   return (
@@ -26,13 +26,26 @@ gsap.from('#chip', {
         </div>
         {/* chip title and subtitle */}
         <div className="flex flex-col items-center">
-<h2 className="chip-title">
-    A17 Pro chip.
-    <br /> A monster win for gaming.
-</h2>
-<p className="chip-subtitle">
-    It's here. The biggest redesign in the history of Apple GPUs.
-</p>
+          <h2 className="chip-title">
+            A17 Pro chip.
+            <br /> A monster win for gaming.
+          </h2>
+          <p className="chip-subtitle">
+            It's here. The biggest redesign in the history of Apple GPUs.
+          </p>
+        </div>
+
+        {/* chip video */}
+        <div className="mt-10 md:mt-20 mb-14">
+          <div className="relative h-full flex-center">
+            <div className="overflow-hidden">
+              <img
+                src={frameImg}
+                alt="frame"
+                className="bg-transparent relative z-10"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
