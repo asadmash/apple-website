@@ -46,8 +46,9 @@ const Chip = () => {
         </div>
 
         {/* chip video */}
+      
         <div className="mt-10 md:mt-20 mb-14">
-          <div className="relative h-full flex-center">
+          <div className="relative h-full flex flex-center">
             <div className="overflow-hidden">
               <img
                 src={frameImg}
@@ -55,11 +56,12 @@ const Chip = () => {
                 className="bg-transparent relative z-10"
               />
             </div>
-            <div className="chip-video">
+            <div className="chip-video absolute">
               <video
                 className="pointer-events-none"
                 playsInline
                 preload="none"
+                muted
                 autoPlay
                 ref={videoRef}
               >
@@ -67,11 +69,14 @@ const Chip = () => {
               </video>
             </div>
           </div>
+               {/* game title */}
+          <p className="text-gray font-semibold text-center mt-3">
+            Honkai: Star Rail
+          </p>
         </div>
-        {/* game title */}
-        <p className="text-gray font-semibold text-center mt-3">
-          Honkai: Star Rail
-        </p>
+
+   
+      
         {/* chip description */}
         <div className="chip-text-container mt-10">
           <div className="flex flex-1 justify-center flex-col">
@@ -83,24 +88,21 @@ const Chip = () => {
               .
             </p>
 
-
-<p className="chip-text g_fadeIn mt-10">
-            Mobile{" "}
-            <span className="text-white">
-              games will look and feel so immersive
-            </span>
-            , with incredibly detailed environments and characters.
-          </p>
-</div>
-         
+            <p className="chip-text g_fadeIn mt-10">
+              Mobile{" "}
+              <span className="text-white">
+                games will look and feel so immersive
+              </span>
+              , with incredibly detailed environments and characters.
+            </p>
+          </div>
 
           <div className="flex-1 flex justify-center flex-col g_fadeIn">
-          <p className="chip-text">New</p>
-          <p className="chip-bigtext">Pro-class GPU</p>
-          <p className="chip-text">with 6 cores</p>
+            <p className="chip-text">New</p>
+            <p className="chip-bigtext">Pro-class GPU</p>
+            <p className="chip-text">with 6 cores</p>
+          </div>
         </div>
-        </div>
-  
       </div>
     </section>
   );
